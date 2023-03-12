@@ -6,7 +6,7 @@ Scripts to filter out leagues data from loot logger runelite plugin.
 - Tracks based on username (or something equivalent, such as email address or user ID)
 - During the Leagues 3 game mode, loot tracked was not differentiated from loot received in the main game
 - As a result, the loot logger data contains Leagues 3 data, which we do not want
-- Format of this data is .log files, similar to JSON, example of one line is shown below:
+- Format of this data is .log files, which appears to be in JSON format. See example file `alchemical hydra.log`, extract of a few lines shown below:
 
 `{"name":"Alchemical Hydra","level":426,"killCount":1,"type":"NPC","drops":[{"name":"Blood rune","id":565,"quantity":279,"price":279},{"name":"Ranging potion(3)","id":169,"quantity":1,"price":354},{"name":"Super restore(3)","id":3026,"quantity":1,"price":11704},{"name":"Super restore(3)","id":3026,"quantity":1,"price":11704}],"date":"Feb 4, 2022, 2:01:14 AM"}
 {"name":"Alchemical Hydra","level":426,"killCount":2,"type":"NPC","drops":[{"name":"Brimstone key","id":23083,"quantity":1,"price":0},{"name":"Coins","id":995,"quantity":51184,"price":1},{"name":"Ranging potion(3)","id":169,"quantity":1,"price":277},{"name":"Super restore(3)","id":3026,"quantity":1,"price":11677},{"name":"Super restore(3)","id":3026,"quantity":1,"price":11677}],"date":"Feb 4, 2022, 3:19:44 AM"}
@@ -17,9 +17,9 @@ Scripts to filter out leagues data from loot logger runelite plugin.
 - Iterate through all .log files
 - Read the data as JSON using `json.load()`
 - Convert the `data['date']` value to datetime format using `datetime.strptime()`
-- Check if the date value is within the period in which Leagues 3 was active (19th Jan 2022 - 16th March 2022)
+- Check if the date value is within the period in which Leagues 3 was running (19th Jan 2022 - 16th March 2022)
 - If the date value is within the Leagues 3 timeframe, write it to [name]-leagues.log
-- If the date data is outside of the Leagues 3 timeframe, write it [name].log
+- If the date data is outside of the Leagues 3 timeframe, write it [name]-non-leagues.log
 
 ## Issues
 
