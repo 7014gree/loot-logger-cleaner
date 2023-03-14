@@ -28,7 +28,8 @@ def date_inputs(filter_kwargs: dict) -> dict:
         except (ValueError, TypeError) as e:
             print(f"Enter valid date strings: {str(e)}.")
             return date_inputs()
-        return filter_kwargs.update({'start_date': start_date, 'end_date': end_date})
+        filter_kwargs.update({'start_date': start_date, 'end_date': end_date})
+        return filter_kwargs
     else:
         print("Default dates used.")
         return filter_kwargs
