@@ -16,7 +16,7 @@ def delete_file(name: str, log_name: str):
     except FileNotFoundError:
         pass
 
-def date_inputs(filter_kwargs) -> dict:
+def date_inputs(filter_kwargs: dict) -> dict:
     if input("Enter 'Y' to input dates: ").upper() == "Y":
         start_str = input("Enter start date in format 'DD/MM/YY': ")
         end_str = input("Enter end date in format 'DD/MM/YY': ")

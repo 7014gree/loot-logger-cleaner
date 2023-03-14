@@ -34,3 +34,9 @@ Scripts to filter out leagues data from loot logger runelite plugin.
 - Investigated why the .log files were not in the correct format using https://jsonlint.com/
 - The cause is that the .log files do not start with `[`, do not end with `]`, and the JSON objects contained are separated with linebreaks instead of commas
 - Seems like only way to fix this would involve iterating through the file line by line, which seems like it would be at least as slow as the current approach
+
+## Extensions
+- Refactored to use functions
+- Added several try-except blocks
+- Added script which conencts to s3 bucket
+- Added progress bar using tqdm
