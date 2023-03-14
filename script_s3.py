@@ -23,21 +23,24 @@ def date_inputs(filter_kwargs: dict) -> dict:
         start_str = input("Enter start date in format 'DD/MM/YY': ")
         end_str = input("Enter end date in format 'DD/MM/YY': ")
         try:
-            start_date = parse_input_dates(start_str)
-            end_date = parse_input_dates(end_str)  + timedelta(hours=24) - timedelta(seconds=1) # To get 23:59:59
+            start_date = parse_input_dates("start", start_str)
+            end_date = parse_input_dates("end", end_str)  + timedelta(hours=24, seconds=-1) # To get 23:59:59
             if end_date < start_date:
-                raise ValueError(f"end date '{end_date}' is before start date '{start_date}'")
+                raise ValueError(f"end date '{end_str}' is before start date '{start_str}'")
         except (ValueError, TypeError) as e:
-            print(f"Enter valid date strings: {str(e)}.")
-            return date_inputs()
+            print(f"Invalid date strings: {str(e)}.")
+            return date_inputs(filter_kwargs)
         filter_kwargs.update({'start_date': start_date, 'end_date': end_date})
         return filter_kwargs
     else:
         print("Default dates used.")
         return filter_kwargs
 
-def parse_input_dates(date_str: str) -> datetime:
-    return datetime.strptime(date_str, '%d/%m/%y')
+def parse_input_dates(start_or_end: str, date_str: str) -> datetime:
+    try:
+        return datetime.strptime(date_str, '%d/%m/%y')
+    except ValueError as e:
+        return parse_input_dates(start_or_end, input(f"Error with input '{date_str}': {str(e)}. Enter valid {start_or_end} date string in format 'DD/MM/YY': "))
 
 def filter_data_s3(s3_client, bucket_name: str, name: str, timestamp: 'str', log_name: str, start_date: datetime = datetime(2022, 1, 26, 0, 0), end_date: datetime = datetime(2022, 3, 16, 23, 59)):
     log_file_obj = s3_client.get_object(Bucket=bucket_name, Key=log_name) # Get object from s3 bucket

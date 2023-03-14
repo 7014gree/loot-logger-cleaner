@@ -35,6 +35,10 @@ Scripts to filter out leagues data from loot logger runelite plugin.
 - The cause is that the .log files do not start with `[`, do not end with `]`, and the JSON objects contained are separated with linebreaks instead of commas
 - Seems like only way to fix this would involve iterating through the file line by line, which seems like it would be at least as slow as the current approach
 
+### Error handling
+- Missed multiple potential errors initially
+- date_input() caused a lot of errors, including with function parse_input_dates when date was outside of range for valid dates (e.g. February 30th)
+
 ## Extensions
 - Refactored to use functions
 - Added several try-except blocks
