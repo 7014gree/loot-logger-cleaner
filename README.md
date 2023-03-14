@@ -38,5 +38,5 @@ Scripts to filter out leagues data from loot logger runelite plugin.
 ## Extensions
 - Refactored to use functions
 - Added several try-except blocks
-- Added script which conencts to s3 bucket
+- Added script which connects to s3 bucket s3://loot-logger-data-ea2cbe2a-7ec4-40ae-9480-2423d82c28ca/
 - Added progress bar using tqdm
