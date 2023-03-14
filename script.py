@@ -37,15 +37,15 @@ def parse_input_dates(date_str: str) -> datetime:
 def filter_data(name: str, log_name: str, start_date: datetime = datetime(2022, 1, 26, 0, 0), end_date: datetime = datetime(2022, 3, 16, 23, 59)):
     # Ensures file is overwritten by just deleting it
     delete_file(name, log_name)
-    delete_file(f'{name}-non', f'{log_name}')
+    delete_file(f'{name}-non', log_name)
 
     with open(f'data/{name}/{log_name}', 'r') as read_file, open(f'data/{name}-leagues/{log_name}', 'a') as leagues_file, open(f'data/{name}-non-leagues/{log_name}', 'a') as non_leagues_file:
         for line in read_file:
             json_data = json.loads(line)
             if start_date < datetime.strptime(json_data['date'], '%b %d, %Y, %H:%M:%S %p') < end_date:
-                leagues_file.write(f"{line}") # Automatically adds line break for append mode
+                leagues_file.write(line) # Automatically adds line break for append mode
             else:
-                non_leagues_file.write(f"{line}")
+                non_leagues_file.write(line)
 
 if __name__ == "__main__":
     while True:
